@@ -39,13 +39,3 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 // route pour les controllers user
     Route::post('user/login',[UserController::class,'login']);
-    
-   
-  
-
-
-
-   
-
-
-  

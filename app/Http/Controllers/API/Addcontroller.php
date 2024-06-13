@@ -21,6 +21,7 @@ class Addcontroller extends Controller
            $data['product_id']=$request['product_id'];
            $data['unique_ajout']=uniqid();
            $ajout=Add_product::create($data);
+           
            $produit=Product::find($request['product_id']);
            $produit->qte_stock=$produit->qte_stock+$request['qte_ajouter'];
            $produit->qte_stocktotal=$produit->qte_stocktotal+$request['qte_ajouter'];

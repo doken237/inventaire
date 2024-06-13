@@ -23,21 +23,27 @@ class UserController extends Controller
                 $data['email']=$request['email'];
                 $data['unique_user']= uniqid();
                 $data['password']=Hash::make($request->password);
-                // if ((!Auth::user()->id)) {
+                // if ((Auth::user()->id!=1)) {
                 //     return response()->json([
                 //         'message'=>'vous n\'etes pas un asministrateur vous ne pouvez pas creer un utilisateur',
                 //         'status'=>false, 
                 //     ]);
                 //     die();
                 // }
-                if (($request['role']==1)){
+
+                $role=Auth::user()->role;
+               
+                if ($role!=1) {
                     return response()->json([
                         'message'=>'seul l\'admi a le role 1',
                         'status'=>false, 
                         'ud'=>Auth::user()->id
                     ]);
                     die();
-                }
+                }    
+             
+
+                
                 if (isset($request['email'])) {
                     if (!filter_var($request['email'], FILTER_VALIDATE_EMAIL)) {
                         return response()->json([

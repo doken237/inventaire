@@ -73,22 +73,13 @@ class ProductController extends Controller
 
     public function details(Request $request){ 
         try{
-            
-            
-            $produit =Product::all(['id','designation','pa','description','pv','qte_stock']); //Récupération de toutes la catégories
-           
+            $produits = Product::where('qte_stock', '>', 0)->get(['id','designation','pa','description','pv','qte_stock']);
         
-           
-            // $qtestock = Product::pluck('qte_stock')->toArray();
-           
-                if ($produit[1] >= 1) {
                     return response()->json([
                         'message'=>'Affichages  des produits',
-                        'produit'=>$produit->qte_stock,
+                        'produits'=>$produits,
                         'status'=>true 
                      ]);
-                } 
-            
 
         }
         catch(\Throwable $th)
@@ -103,7 +94,7 @@ class ProductController extends Controller
     public function search(Request $request){ 
         try{
             $data=$request->all();
-           $produit=Product::where('designation',$request['designation'])->get(['user_id','description','designation','pa','pv','qte_stock']);
+           $produit=Product::where('designation','like','%'.$request['designation'].'%')->get(['user_id','description','designation','pa','pv','qte_stock']);
             if (!$produit){
                 return response()->json([
                     'message'=>'Ce peoduit n\'existe pas!',

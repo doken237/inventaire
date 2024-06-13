@@ -21,6 +21,7 @@ class Sellscontroller extends Controller
            $data['product_id']=$request['product_id'];
            $data['unique_supp']=uniqid();
            $sells=Sells_product::create($data);
+           
            $produit=Product::find($request['product_id']);
            $produit->qte_stock=$produit->qte_stock-$request['qte_sortie'];
            $produit->save();
