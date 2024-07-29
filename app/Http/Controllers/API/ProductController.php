@@ -10,6 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    /**
+ * @OA\Post(
+ *     path="/api/product/create",
+ *     summary="Création d'un produit",
+ *     security={{"bearerAuth": {}}},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"designation", "description", "pa", "pv", "qte_alr", "qte_stock"},
+ *             @OA\Property(property="designation", type="string", description="Libelle du Produit", example="Souris Usb"),
+ *             @OA\Property(property="description", type="string", description="desription du produit", example="souris filaire"),
+ *             @OA\Property(property="pa", type="float", description="prix d'achat du produit", example=2500),
+ *             @OA\Property(property="pv", type="float", description="prix de vente du produit", example=5000),
+ *             @OA\Property(property="qte_alr", type="integer", description="Quantite d'alerte du produit", example=3),
+ *        @OA\Property(property="qte_stock", type="integer", description="Quantite en stock du produit", example=10)
+ *         )
+ *     ),
+ *     @OA\Response(response="201", description="produit  cree avec succes"),
+ *     @OA\Response(response="422", description="Erreurs de validation")
+ * )
+ */
     public function create(Request $request){
         try{
             $data=$request->validate([
@@ -71,6 +92,17 @@ class ProductController extends Controller
 
     }
 
+
+
+           /**
+ * @OA\Get(
+ *     path="/api/product/details",
+ *     summary="Affichage des produits",
+ *     security={{"bearerAuth": {}}},
+ *     @OA\Response(response=400, description="Listes des produits"),
+ *     @OA\Response(response=404, description="Not Found")
+ * )
+ */
     public function details(Request $request){ 
         try{
             $produits = Product::where('qte_stock', '>', 0)->get(['id','designation','pa','description','pv','qte_stock']);
@@ -91,6 +123,25 @@ class ProductController extends Controller
         }
     }
 
+    /**
+ * @OA\Get(
+ *     path="/api/product/search",
+ *     summary="Rechercher dun produit",
+ *     security={{"bearerAuth": {}}},
+ *     @OA\Parameter(
+ *         name="designation",
+ *         in="query",
+ *         description="designation du produit",
+ *         required=false,
+ *         @OA\Schema(
+ *             type="string"
+ *         )
+ *     ),
+ *   
+ *     @OA\Response(response=400, description="Bad Request"),
+ *     @OA\Response(response=404, description="Not Found")
+ * )
+ */
     public function search(Request $request){ 
         try{
             $data=$request->all();
@@ -121,6 +172,27 @@ class ProductController extends Controller
         }
     }
 
+    /**
+ * @OA\Post(
+ *     path="/api/product/update",
+ *     summary="Mise a jour d'un produit",
+ *     security={{"bearerAuth": {}}},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"designation", "description", "pa", "pv", "qte_alr", "qte_stock"},
+ *             @OA\Property(property="designation", type="string", description="Libelle du Produit", example="Souris Usb"),
+ *             @OA\Property(property="description", type="string", description="desription du produit", example="souris filaire"),
+ *             @OA\Property(property="pa", type="float", description="prix d'achat du produit", example=2500),
+ *             @OA\Property(property="pv", type="float", description="prix de vente du produit", example=5000),
+ *             @OA\Property(property="qte_alr", type="integer", description="Quantite d'alerte du produit", example=3),
+ *        @OA\Property(property="qte_stock", type="integer", description="Quantite en stock du produit", example=10)
+ *         )
+ *     ),
+ *     @OA\Response(response="201", description="produit  mis a jour avec succes"),
+ *     @OA\Response(response="422", description="Erreurs de validation")
+ * )
+ */
     public function update(Request $request){
         try{
             $data=$request->all();

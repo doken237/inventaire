@@ -10,6 +10,22 @@ use App\Models\Sells_product;
 
 class Sellscontroller extends Controller
 {
+    /**
+ * @OA\Post(
+ *     path="/api/sells/create",
+ *     summary="Sortie d'un produit",
+ *     security={{"bearerAuth": {}}},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"product_id"},
+ *             @OA\Property(property="product_id", type="integer", description="identifiant du produit", example=1)
+ * )
+ *     ),
+ *     @OA\Response(response="201", description="produit  sorti avec succes"),
+ *     @OA\Response(response="422", description="Erreurs de validation")
+ * )
+ */
     public function create(Request $request){
         try{
             $data=$request->validate([

@@ -35,7 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //route vers la sortie 
     Route::post('sells/create',[Sellscontroller::class,'create']);
-
 });
 // route pour les controllers user
     Route::post('user/login',[UserController::class,'login']);
+    Route::post('user/logout',[UserController::class,'logout']);

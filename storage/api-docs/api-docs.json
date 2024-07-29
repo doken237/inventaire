@@ -1,0 +1,508 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/ajout/create": {
+            "post": {
+                "summary": "Ajouter un produit",
+                "operationId": "6e47f3ac152e1f34bec3161780deada7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "qte_ajouter",
+                                    "product_id"
+                                ],
+                                "properties": {
+                                    "qte_ajouter": {
+                                        "description": "quantite ajouter",
+                                        "type": "integer",
+                                        "example": "30"
+                                    },
+                                    "product_id": {
+                                        "description": "Identifiant du produit",
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "produit ajouter  avec succès"
+                    },
+                    "422": {
+                        "description": "Erreurs de validation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/product/create": {
+            "post": {
+                "summary": "Création d'un produit",
+                "operationId": "8f4e29424e44f59b79251dc05369d58d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "designation",
+                                    "description",
+                                    "pa",
+                                    "pv",
+                                    "qte_alr",
+                                    "qte_stock"
+                                ],
+                                "properties": {
+                                    "designation": {
+                                        "description": "Libelle du Produit",
+                                        "type": "string",
+                                        "example": "Souris Usb"
+                                    },
+                                    "description": {
+                                        "description": "desription du produit",
+                                        "type": "string",
+                                        "example": "souris filaire"
+                                    },
+                                    "pa": {
+                                        "description": "prix d'achat du produit",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 2500
+                                    },
+                                    "pv": {
+                                        "description": "prix de vente du produit",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 5000
+                                    },
+                                    "qte_alr": {
+                                        "description": "Quantite d'alerte du produit",
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "qte_stock": {
+                                        "description": "Quantite en stock du produit",
+                                        "type": "integer",
+                                        "example": 10
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "produit  cree avec succes"
+                    },
+                    "422": {
+                        "description": "Erreurs de validation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/product/details": {
+            "get": {
+                "summary": "Affichage des produits",
+                "operationId": "81a62639060dacff47348b0c4a5f3277",
+                "responses": {
+                    "400": {
+                        "description": "Listes des produits"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/product/search": {
+            "get": {
+                "summary": "Rechercher dun produit",
+                "operationId": "d80b7efa5b94717d2aaeb1a38d9066cd",
+                "parameters": [
+                    {
+                        "name": "designation",
+                        "in": "query",
+                        "description": "designation du produit",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/product/update": {
+            "post": {
+                "summary": "Mise a jour d'un produit",
+                "operationId": "5b0774934c87184ce61a66f2a7851b3d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "designation",
+                                    "description",
+                                    "pa",
+                                    "pv",
+                                    "qte_alr",
+                                    "qte_stock"
+                                ],
+                                "properties": {
+                                    "designation": {
+                                        "description": "Libelle du Produit",
+                                        "type": "string",
+                                        "example": "Souris Usb"
+                                    },
+                                    "description": {
+                                        "description": "desription du produit",
+                                        "type": "string",
+                                        "example": "souris filaire"
+                                    },
+                                    "pa": {
+                                        "description": "prix d'achat du produit",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 2500
+                                    },
+                                    "pv": {
+                                        "description": "prix de vente du produit",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 5000
+                                    },
+                                    "qte_alr": {
+                                        "description": "Quantite d'alerte du produit",
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "qte_stock": {
+                                        "description": "Quantite en stock du produit",
+                                        "type": "integer",
+                                        "example": 10
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "produit  mis a jour avec succes"
+                    },
+                    "422": {
+                        "description": "Erreurs de validation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/sells/create": {
+            "post": {
+                "summary": "Sortie d'un produit",
+                "operationId": "c23a446d54b820b573a8c51ad3b41d1a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "product_id"
+                                ],
+                                "properties": {
+                                    "product_id": {
+                                        "description": "identifiant du produit",
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "produit  sorti avec succes"
+                    },
+                    "422": {
+                        "description": "Erreurs de validation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user/create": {
+            "post": {
+                "summary": "Création d'un utilisateur",
+                "operationId": "25d0b9760a3cb4c905a7fab64035aa8b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "role",
+                                    "telephone",
+                                    "password",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "Email de l'utilisateur",
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "dok@gmail.com"
+                                    },
+                                    "role": {
+                                        "description": "Rôle de l'utilisateur",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "telephone": {
+                                        "description": "Numéro de téléphone de l'utilisateur",
+                                        "type": "string",
+                                        "example": "675656545"
+                                    },
+                                    "password": {
+                                        "description": "Le mot de passe de l'utilisateur",
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "doknjhyt562@"
+                                    },
+                                    "name": {
+                                        "description": "Nom de l'utilisateur",
+                                        "type": "string",
+                                        "example": "danie"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur enregistré avec succès"
+                    },
+                    "422": {
+                        "description": "Erreurs de validation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user/details": {
+            "get": {
+                "summary": "Afficher tous les utilisateurs",
+                "operationId": "442b7be86dae1d219431d6ab19fb6e8d",
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user/search": {
+            "get": {
+                "summary": "Rechercherche dun utilsateur",
+                "operationId": "c1c272da9240904a4d3689138b2933c8",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "The email of the user to search for",
+                        "required": false,
+                        "schema": {
+                            "type": "email"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user/update": {
+            "post": {
+                "summary": "mise a  d'un utilisateur",
+                "operationId": "9c3d017f8fb917368374dba7856868e3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "Email de l'utilisateur",
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "dok@gmail.com"
+                                    },
+                                    "role": {
+                                        "description": "Rôle de l'utilisateur",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "telephone": {
+                                        "description": "Numéro de téléphone de l'utilisateur",
+                                        "type": "string",
+                                        "example": "675656545"
+                                    },
+                                    "password": {
+                                        "description": "Le mot de passe de l'utilisateur",
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "doknjhyt562@"
+                                    },
+                                    "name": {
+                                        "description": "Nom de l'utilisateur",
+                                        "type": "string",
+                                        "example": "danie"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur update"
+                    },
+                    "422": {
+                        "description": "Erreurs de validation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user/login": {
+            "post": {
+                "summary": "Creation d'un login",
+                "operationId": "cf7d17e6b88efbe4070506876d0a8483",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "Email de l'utilisateur",
+                                        "type": "email",
+                                        "example": "dok@gmail.com"
+                                    },
+                                    "password": {
+                                        "description": "le mot de passe de l'utilisateur",
+                                        "type": "paswword",
+                                        "example": "doknjhyt562@"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur enregistré avec succès"
+                    },
+                    "422": {
+                        "description": "Erreurs de validation"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
